@@ -276,6 +276,9 @@
 /* Define to 1 if you want to compile with MySQL support */
 #undef USE_MYSQL
 
+/* mystem support */
+#undef USE_MYSTEM
+
 /* define to use ODBC library */
 #undef USE_ODBC
 
