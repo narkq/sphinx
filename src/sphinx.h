@@ -25,6 +25,7 @@
 	#define USE_LIBEXPAT	1	/// whether to compile libexpat support
 	#define USE_LIBICONV	1	/// whether to compile iconv support
 	#define	USE_LIBSTEMMER	0	/// whether to compile libstemmber support
+	#define USE_MYSTEM		0	/// whether to compile mystem support
 	#define	USE_RE2			0	/// whether to compile RE2 support
 	#define USE_RLP			0	/// whether to compile RLP support
 	#define USE_WINDOWS		1	/// whether to compile for Windows

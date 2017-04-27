@@ -21039,7 +21039,8 @@ enum
 	SPH_MORPH_AOTLEMMER_EN_ALL,
 	SPH_MORPH_AOTLEMMER_DE_ALL,
 	SPH_MORPH_LIBSTEMMER_FIRST,
-	SPH_MORPH_LIBSTEMMER_LAST = SPH_MORPH_LIBSTEMMER_FIRST + 64
+	SPH_MORPH_LIBSTEMMER_LAST = SPH_MORPH_LIBSTEMMER_FIRST + 64,
+	SPH_MORPH_MYSTEM
 };
 
 
@@ -21469,6 +21470,16 @@ int CSphTemplateDictTraits::InitMorph ( const char * szMorph, int iLength, CSphS
 		return AddMorph ( SPH_MORPH_STEM_EN );
 	}
 
+#if USE_MYSTEM
+	if ( iLength==6 && !strncmp ( szMorph, "mystem", iLength ) )
+	{
+		if ( !sphMystemInit ( sMessage ) )
+			return ST_ERROR;
+
+		return AddMorph ( SPH_MORPH_MYSTEM );
+	}
+#endif
+
 	if ( iLength==7 && !strncmp ( szMorph, "stem_ru", iLength ) )
 	{
 		if ( m_dMorph.Contains ( SPH_MORPH_AOTLEMMER_RU_UTF8 ) )
@@ -21482,6 +21493,14 @@ int CSphTemplateDictTraits::InitMorph ( const char * szMorph, int iLength, CSphS
 			sMessage.SetSprintf ( "stem_ru and lemmatize_ru_all clash" );
 			return ST_ERROR;
 		}
+
+#if USE_MYSTEM
+		if ( m_dMorph.Contains ( SPH_MORPH_MYSTEM ) )
+		{
+			sMessage.SetSprintf ( "stem_ru and mystem clash" );
+			return ST_ERROR;
+		}
+#endif
 
 		stem_ru_init ();
 		return AddMorph ( SPH_MORPH_STEM_RU_UTF8 );
@@ -22632,6 +22651,12 @@ bool CSphTemplateDictTraits::StemById ( BYTE * pWord, int iStemmer ) const
 	case SPH_MORPH_AOTLEMMER_DE_UTF8:
 		sphAotLemmatizeDeUTF8 ( pWord );
 		break;
+
+#if USE_MYSTEM
+	case SPH_MORPH_MYSTEM:
+		sphMystemLemmatize ( pWord );
+		break;
+#endif
 
 	case SPH_MORPH_AOTLEMMER_RU_ALL:
 	case SPH_MORPH_AOTLEMMER_EN_ALL:

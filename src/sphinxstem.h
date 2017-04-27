@@ -83,6 +83,13 @@ void	sphAotLemmatizeRu ( CSphVector<CSphString> & dLemmas, const BYTE * pWord );
 void	sphAotLemmatizeDe ( CSphVector<CSphString> & dLemmas, const BYTE * pWord );
 void	sphAotLemmatize ( CSphVector<CSphString> & dLemmas, const BYTE * pWord, int iLang );
 
+bool	sphMystemInit ( CSphString & sError );
+
+void	sphMystemLemmatize ( BYTE * pWord );
+void	sphMystemLemmatize ( CSphVector<CSphString> & dLemmas, const BYTE * pWord );
+
+void	sphMystemShutdown ();
+
 /// get lemmatizer dictionary info (file name, crc)
 const CSphNamedInt &	sphAotDictinfo ( int iLang );
 

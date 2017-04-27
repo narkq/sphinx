@@ -8,6 +8,7 @@ set (LIBSPHINX_SRCS sphinx.cpp sphinxexcerpt.cpp
 		sphinxsort.cpp sphinxexpr.cpp sphinxfilter.cpp
 		sphinxsearch.cpp sphinxrt.cpp sphinxjson.cpp
 		sphinxaot.cpp sphinxplugin.cpp
+		sphinxmystem.cpp
 		sphinxudf.c)
 set (INDEXER_SRCS indexer.cpp)
 set (INDEXTOOL_SRCS indextool.cpp)

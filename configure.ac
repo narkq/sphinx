@@ -477,6 +477,22 @@ AM_CONDITIONAL(USE_LIBSTEMMER, test x$ac_cv_use_libstemmer != xno)
 AM_CONDITIONAL(USE_INTERNAL_LIBSTEMMER, test x$ac_cv_use_internal_libstemmer != xno)
 
 
+AC_ARG_WITH([mystem],
+	AC_HELP_STRING([--with-mystem], [compile with mystem support (default is disabled)]),
+	[ac_cv_use_mystem=$withval], [ac_cv_use_mystem=no]
+)
+
+AC_MSG_CHECKING([whether to compile with mystem support])
+if test x$ac_cv_use_mystem != xno; then
+	AC_MSG_RESULT([yes])
+	AC_DEFINE(USE_MYSTEM, 1, [mystem support])
+else
+	AC_MSG_RESULT([no])
+	AC_DEFINE(USE_MYSTEM, 0, [mystem support])
+fi
+AM_CONDITIONAL(USE_MYSTEM, test x$ac_cv_use_mystem != xno)
+
+
 dnl ---
 
 # we can now set preprocessor flags for both C and C++ compilers
